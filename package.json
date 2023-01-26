@@ -6,9 +6,6 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "postinstall": "husky install",
-    "prepack": "pinst --disable",
-    "postpack": "pinst --enable",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -22,6 +19,10 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.(ts|tsx)": "npm run lint",
+    "*.{js,css,md,html,json}": "npm run format"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -46,7 +47,7 @@
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "jest": "29.3.1",
     "lint-staged": "^13.1.0",
     "prettier": "^2.3.2",
@@ -64,10 +65,6 @@
       "json",
       "ts"
     ],
-    "lint-staged": {
-      "*.(ts|tsx)": "npm run lint",
-      "*.{js,css,md,html,json}": "npm run format"
-    },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
