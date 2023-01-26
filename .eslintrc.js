@@ -79,7 +79,13 @@ module.exports = {
   },
   settings: {
     "import/resolver": {
-      "typescript": {}
+      alias: {
+        map: [
+          ['@', './src'],
+          ['@test', './test'],
+        ],
+        extensions: ['.ts', '.js', '.tsx', '.json', '.json5'],
+      },
     },
   },
 };
