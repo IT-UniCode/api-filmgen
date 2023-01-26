@@ -7,6 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -63,7 +65,8 @@
       "ts"
     ],
     "lint-staged": {
-      "src/**/*.{ts,tsx,js,jsx}": "yarn lint"
+      "*.(ts|tsx)": "npm run lint",
+      "*.{js,css,md,html,json}": "npm run format"
     },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
@@ -75,8 +78,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix"
   }
 }
