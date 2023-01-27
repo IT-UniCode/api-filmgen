@@ -27,8 +27,7 @@ class ConfigService {
       password: this.getValue('DATABASE_PASSWORD'),
       synchronize: true,
       logging: true,
-
-      entities: ['dist/**/*.entity.js'],
+      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     };
   }
 }

@@ -75,10 +75,11 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'import/prefer-default-export': 'off',
+    'import/no-unresolved': [2, { ignore: ['src/core'] }],
     'no-nested-ternary': 'off',
   },
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       alias: {
         map: [
           ['@', './src'],
