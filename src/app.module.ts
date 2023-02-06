@@ -3,7 +3,7 @@ import { APP_PIPE } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { IdValidationPipe } from 'pipes/id-validation.pipes';
+import { IdValidationPipe } from '../pipes/id-validation.pipes';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
