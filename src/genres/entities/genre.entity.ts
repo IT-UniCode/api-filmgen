@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { BaseEntity } from 'src/core/entities/base.entity';
 import { Column, Entity } from 'typeorm';
 
@@ -8,6 +9,7 @@ export class GenreEntity extends BaseEntity {
     Object.assign(this, partial);
   }
 
+  @ApiProperty({ type: String })
   @Column({ type: 'varchar', length: '400', nullable: false })
   name: string;
 }
