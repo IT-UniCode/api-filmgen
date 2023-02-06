@@ -4,8 +4,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPositiveRequest } from 'core/types/main';
 import { Repository } from 'typeorm';
+
+import { IPositiveRequest } from 'core/types/main';
 
 import { GenreEntity } from './entities/genre.entity';
 import { IData } from './types/genre.interface';

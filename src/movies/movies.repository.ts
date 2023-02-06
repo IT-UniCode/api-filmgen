@@ -4,8 +4,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Filters, SortDirection } from 'core/enums/main';
 import { Brackets, Repository, SelectQueryBuilder } from 'typeorm';
+
+import { Filters, SortDirection } from 'core/enums/main';
 
 import { FilterMoviesDto } from './dto/filter-movie.dto';
 import { MaxMinYearResDTO } from './dto/max-min-year.response.dto';

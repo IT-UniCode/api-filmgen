@@ -75,17 +75,13 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'import/prefer-default-export': 'off',
-    'import/no-unresolved': 'off',
     'no-nested-ternary': 'off',
   },
   settings: {
     'import/resolver': {
-      alias: {
-        map: [
-          ['@', './src'],
-          ['@test', './test'],
-        ],
-        extensions: ['.ts', '.js', '.tsx', '.json', '.json5'],
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/'],
       },
     },
   },
