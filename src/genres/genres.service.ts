@@ -1,32 +1,33 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { IPositiveRequest } from 'src/core/types/main';
-import { Repository } from 'typeorm';
 
-import { GenreEntity } from './entities/genre.entity';
-import { IData } from './types/genre.interface';
+import { GetByIdsDto } from './dto/get-by-ids.dto';
+import { GenresRepository } from './genres.repository';
+import { IData, IGenre } from './types/genre.interface';
 
 @Injectable()
 export class GenresService {
   constructor(
-    @InjectRepository(GenreEntity)
-    private genreEntity: Repository<GenreEntity>,
+    private readonly genresRepository: GenresRepository,
     private readonly httpService: HttpService,
   ) {}
 
+  async findAll(): Promise<IGenre[]> {
+    return this.genresRepository.findAll();
+  }
+
+  async findByIds(idsArray: GetByIdsDto): Promise<IGenre[]> {
+    return this.genresRepository.findByIds(idsArray.ids);
+  }
+
   async fetchGenres(): Promise<IPositiveRequest> {
     const { data } = await this.httpService.axiosRef.get<IData>(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}&language=en-US`,
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}&language=ru`,
     );
 
-    if (!data) {
-      throw new InternalServerErrorException('Not found');
-    }
+    if (!data.genres.length) throw new NotFoundException('Genres is not exist');
 
-    const genresEntities = await this.genreEntity.create(data.genres);
-    await this.genreEntity.save(genresEntities);
-
-    return { success: true };
+    return this.genresRepository.saveGenres(data);
   }
 }
