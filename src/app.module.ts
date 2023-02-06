@@ -1,7 +1,9 @@
-import { Module, ValidationPipe } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { IdValidationPipe } from 'pipes/id-validation.pipes';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -21,7 +23,7 @@ import { MoviesModule } from './movies/movies.module';
     AppService,
     {
       provide: APP_PIPE,
-      useClass: ValidationPipe,
+      useClass: IdValidationPipe,
     },
   ],
 })
