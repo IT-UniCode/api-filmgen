@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BaseEntity } from 'typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,7 +13,7 @@ import { MoviesModule } from './movies/movies.module';
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     GenresModule,
     MoviesModule,
-    BaseEntity,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
