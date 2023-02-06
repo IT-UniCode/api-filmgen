@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BaseEntity } from 'typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,6 +13,7 @@ import { MoviesModule } from './movies/movies.module';
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     GenresModule,
     MoviesModule,
+    BaseEntity,
   ],
   controllers: [AppController],
   providers: [AppService],
