@@ -1,14 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity } from 'typeorm';
-
-import { BaseEntity } from 'core/entities/base.entity';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity('movies')
-export class MovieEntity extends BaseEntity {
-  constructor(partial: Partial<MovieEntity>) {
-    super();
-    Object.assign(this, partial);
-  }
+export class MovieEntity {
+  @ApiProperty({ type: Number, default: 34234 })
+  @PrimaryColumn()
+  id: number;
 
   @ApiProperty({ type: Boolean })
   @Column({ type: 'boolean', nullable: false, default: false })
