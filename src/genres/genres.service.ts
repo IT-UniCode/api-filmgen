@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { IPositiveRequest } from 'core/types/main';
+import { IPositiveRequest } from '../../core/types/main';
 
 import { GetByIdsDto } from './dto/get-by-ids.dto';
 import { GenreEntity } from './entities/genre.entity';

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 
-import { Filters } from 'core/enums/main';
+import { Filters } from '../../../core/enums/main';
 
 export class FilterMoviesDto {
   @ApiProperty({

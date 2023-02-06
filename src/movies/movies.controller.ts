@@ -2,8 +2,7 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
-import { IPositiveRequest } from 'core/types/main';
-
+import { IPositiveRequest } from '../../core/types/main';
 import { IdValidationPipe } from '../../pipes/id-validation.pipes';
 
 import { MaxMinYearResDTO } from './dto/max-min-year.response.dto';

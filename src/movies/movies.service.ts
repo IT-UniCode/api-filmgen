@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-import { IPagination, IPositiveRequest } from 'core/types/main';
+import { IPagination, IPositiveRequest } from '../../core/types/main';
 
 import { MaxMinYearResDTO } from './dto/max-min-year.response.dto';
 import { PaginateMoviesDto } from './dto/paginate-movie.dto';

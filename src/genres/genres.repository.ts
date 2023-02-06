@@ -6,7 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { IPositiveRequest } from 'core/types/main';
+import { IPositiveRequest } from '../../core/types/main';
 
 import { GenreEntity } from './entities/genre.entity';
 import { IData } from './types/genre.interface';
