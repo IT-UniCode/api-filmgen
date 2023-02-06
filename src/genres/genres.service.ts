@@ -1,10 +1,11 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IPositiveRequest } from 'src/core/types/main';
+import { IPositiveRequest } from 'core/types/main';
 
 import { GetByIdsDto } from './dto/get-by-ids.dto';
+import { GenreEntity } from './entities/genre.entity';
 import { GenresRepository } from './genres.repository';
-import { IData, IGenre } from './types/genre.interface';
+import { IData } from './types/genre.interface';
 
 @Injectable()
 export class GenresService {
@@ -13,11 +14,11 @@ export class GenresService {
     private readonly httpService: HttpService,
   ) {}
 
-  async findAll(): Promise<IGenre[]> {
+  async findAll(): Promise<GenreEntity[]> {
     return this.genresRepository.findAll();
   }
 
-  async findByIds(idsArray: GetByIdsDto): Promise<IGenre[]> {
+  async findByIds(idsArray: GetByIdsDto): Promise<GenreEntity[]> {
     return this.genresRepository.findByIds(idsArray.ids);
   }
 

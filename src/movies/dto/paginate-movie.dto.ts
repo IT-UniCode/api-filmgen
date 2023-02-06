@@ -1,7 +1,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { PaginateDto } from 'src/core/dto/paginate.dto';
-import { Ordering, SortDirection } from 'src/core/enums/main';
+import { PaginateDto } from 'core/dto/paginate.dto';
+import { Ordering, SortDirection } from 'core/enums/main';
 
 export class PaginateMoviesDto extends PaginateDto {
   @ApiPropertyOptional({ type: String, name: 'searchTerm' })

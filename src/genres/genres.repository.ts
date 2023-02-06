@@ -4,11 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPositiveRequest } from 'src/core/types/main';
-import { In, Repository } from 'typeorm';
+import { IPositiveRequest } from 'core/types/main';
+import { Repository } from 'typeorm';
 
 import { GenreEntity } from './entities/genre.entity';
-import { IData, IGenre } from './types/genre.interface';
+import { IData } from './types/genre.interface';
 
 @Injectable()
 export class GenresRepository {
@@ -17,17 +17,20 @@ export class GenresRepository {
     private genreEntity: Repository<GenreEntity>,
   ) {}
 
-  async findAll(): Promise<IGenre[]> {
+  async findAll(): Promise<GenreEntity[]> {
     return this.genreEntity
       .createQueryBuilder('genres')
       .orderBy('genres.name', 'ASC')
       .getMany();
   }
 
-  async findByIds(idsArray: number[]): Promise<IGenre[]> {
-    const searchGenres = this.genreEntity.findBy({
-      id: In([...idsArray]),
-    });
+  async findByIds(idsArray: number[]): Promise<GenreEntity[]> {
+    const searchGenres = await this.genreEntity
+      .createQueryBuilder('genres')
+      .where('genres.id IN (:...ids)', { ids: idsArray })
+      .orderBy('genres.name')
+      .getMany();
+
     if (!searchGenres) throw new NotFoundException('Genres is not exist');
     return searchGenres;
   }

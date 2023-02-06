@@ -1,4 +1,4 @@
-import { IPagination } from 'src/core/types/main';
+import { IPagination } from 'core/types/main';
 
 export interface IMovie {
   id: number;

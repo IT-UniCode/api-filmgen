@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Filters, SortDirection } from 'src/core/enums/main';
+import { Filters, SortDirection } from 'core/enums/main';
 import { Brackets, Repository, SelectQueryBuilder } from 'typeorm';
 
 import { FilterMoviesDto } from './dto/filter-movie.dto';
@@ -115,15 +115,16 @@ export class MoviesRepository {
   }
 
   async findMovieById(movieId: number): Promise<MovieEntity> {
-    const searchMovies = await this.movieEntity.findOne({
-      where: { id: movieId },
-    });
+    const searchMovie = await this.movieEntity
+      .createQueryBuilder('movies')
+      .where('movies.id = :id', { id: movieId })
+      .getOne();
 
-    if (!searchMovies) {
+    if (!searchMovie) {
       throw new NotFoundException('Movie is not exist');
     }
 
-    return searchMovies;
+    return searchMovie;
   }
 
   async saveMovies(movies: MovieEntity[]): Promise<void> {
