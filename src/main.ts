@@ -22,4 +22,15 @@ async function bootstrap() {
   await app.close();
   await app.listen(process.env.PORT || 4444);
 }
+
+// export async function handler(event: any, context: any) {
+//   if (event.path === '/v1/api') {
+//     event.path = '/v1/api/';
+//   }
+//   if (event.path.includes('swagger-ui')) {
+//     event.path = event.path.replace('/v1/', '/v1/api/');
+//   }
+//   return;
+// }
+
 bootstrap();
