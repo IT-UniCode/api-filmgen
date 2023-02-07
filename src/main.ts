@@ -20,7 +20,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  // SwaggerModule.setup('v1/docs', app, document);
+  SwaggerModule.setup('v1/docs', app, document);
   const outputPath = path.resolve(process.cwd(), 'swagger.json');
   writeFileSync(outputPath, JSON.stringify(document), { encoding: 'utf8' });
 
