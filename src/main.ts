@@ -16,7 +16,6 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  console.log(document);
 
   SwaggerModule.setup('docs', app, document, {
     swaggerOptions: { defaultModelsExpandDepth: -1 },
