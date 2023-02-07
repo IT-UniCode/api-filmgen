@@ -8,7 +8,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(new ValidationPipe());
-  app.setGlobalPrefix('v1');
 
   const config = new DocumentBuilder()
     .setTitle('Filmgen api project')
@@ -17,20 +16,12 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('v1/docs', app, document);
+  SwaggerModule.setup('docs', app, document, {
+    swaggerOptions: { defaultModelsExpandDepth: -1 },
+  });
 
   await app.close();
   await app.listen(process.env.PORT || 4444);
 }
-
-// export async function handler(event: any, context: any) {
-//   if (event.path === '/v1/api') {
-//     event.path = '/v1/api/';
-//   }
-//   if (event.path.includes('swagger-ui')) {
-//     event.path = event.path.replace('/v1/', '/v1/api/');
-//   }
-//   return;
-// }
 
 bootstrap();
