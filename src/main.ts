@@ -1,6 +1,3 @@
-import { writeFileSync } from 'fs';
-import * as path from 'path';
-
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -21,10 +18,8 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('v1/docs', app, document);
-  const outputPath = path.resolve(process.cwd(), 'swagger.json');
-  writeFileSync(outputPath, JSON.stringify(document), { encoding: 'utf8' });
 
   await app.close();
-  // await app.listen(process.env.PORT || 4444);
+  await app.listen(process.env.PORT || 4444);
 }
 bootstrap();
