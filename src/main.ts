@@ -11,7 +11,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document, {
-    customCssUrl: '/swagger.css',
+    swaggerOptions: { defaultModelsExpandDepth: -1 },
   });
 
   await app.listen(3000);
