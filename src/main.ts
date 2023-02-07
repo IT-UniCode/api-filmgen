@@ -11,7 +11,11 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document, {
-    swaggerOptions: { defaultModelsExpandDepth: -1 },
+    swaggerOptions: {
+      defaultModelRendering: 'model',
+      defaultModelsExpandDepth: 1,
+      displayRequestDuration: true,
+    },
   });
 
   await app.listen(3000);
