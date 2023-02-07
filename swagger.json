@@ -1,0 +1,319 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/genres/all": {
+      "get": {
+        "operationId": "GenresController_findAllGenres",
+        "summary": "Get all genres",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/GenreEntity" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Genres"]
+      }
+    },
+    "/v1/genres/ids": {
+      "post": {
+        "operationId": "GenresController_findByIds",
+        "summary": "Get genres by ids",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GetByIdsDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/GenreEntity" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Genres"]
+      }
+    },
+    "/v1/movies/pagination": {
+      "post": {
+        "operationId": "MoviesController_findAllPaginate",
+        "summary": "Get movie with pagination, sort and filter",
+        "parameters": [
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": { "default": 10, "type": "number" }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "schema": { "default": 1, "type": "number" }
+          },
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "dir",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": ["asc", "desc"],
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "popularity",
+              "enum": [
+                "popularity",
+                "release_date",
+                "vote_average",
+                "vote_count"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PaginationBodyDTO" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaginationResDTO" }
+              }
+            }
+          }
+        },
+        "tags": ["Movies"]
+      }
+    },
+    "/v1/movies/get-by-id/{movieId}": {
+      "get": {
+        "operationId": "MoviesController_findMovieById",
+        "summary": "Get movie by ID",
+        "parameters": [
+          {
+            "name": "movieId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MovieEntity" }
+              }
+            }
+          }
+        },
+        "tags": ["Movies"]
+      }
+    },
+    "/v1/movies/last-popular": {
+      "get": {
+        "operationId": "MoviesController_findLastPopular",
+        "summary": "Get last 10 popular",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/MovieEntity" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Movies"]
+      }
+    },
+    "/v1/movies/get-max-min-year": {
+      "get": {
+        "operationId": "MoviesController_getMaxMinYear",
+        "summary": "Get max and min realese year",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MaxMinYearResDTO" }
+              }
+            }
+          }
+        },
+        "tags": ["Movies"]
+      }
+    }
+  },
+  "info": {
+    "title": "Filmgen api project",
+    "description": "The film API project",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "GenreEntity": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "default": 34234 },
+          "name": { "type": "string" }
+        },
+        "required": ["id", "name"]
+      },
+      "GetByIdsDto": {
+        "type": "object",
+        "properties": {
+          "ids": { "type": "array", "items": { "type": "number" } }
+        },
+        "required": ["ids"]
+      },
+      "FilterMoviesDto": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": ["release_date", "vote_average", "vote_count", "genres"]
+          },
+          "from": { "type": "number", "default": null },
+          "to": { "type": "number", "default": null },
+          "genre_ids": {
+            "default": [],
+            "type": "array",
+            "items": { "type": "number" }
+          }
+        },
+        "required": ["field", "from", "to", "genre_ids"]
+      },
+      "PaginationBodyDTO": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/FilterMoviesDto" }
+          }
+        },
+        "required": ["filters"]
+      },
+      "MovieEntity": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "default": 34234 },
+          "adult": { "type": "boolean" },
+          "backdrop_path": { "type": "string" },
+          "genre_ids": { "type": "array", "items": { "type": "number" } },
+          "original_language": { "type": "string" },
+          "overview": { "type": "string" },
+          "popularity": { "type": "number" },
+          "poster_path": { "type": "string" },
+          "release_date": {
+            "format": "date-time",
+            "type": "string",
+            "default": "2021-20-20"
+          },
+          "title": { "type": "string" },
+          "video": { "type": "boolean" },
+          "vote_average": { "type": "number" },
+          "vote_count": { "type": "number" }
+        },
+        "required": [
+          "id",
+          "adult",
+          "backdrop_path",
+          "genre_ids",
+          "original_language",
+          "overview",
+          "popularity",
+          "poster_path",
+          "release_date",
+          "title",
+          "video",
+          "vote_average",
+          "vote_count"
+        ]
+      },
+      "FilterResDTO": {
+        "type": "object",
+        "properties": {
+          "page_size": { "type": "number" },
+          "page": { "type": "number" },
+          "results": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/MovieEntity" }
+          },
+          "total_pages": { "type": "number" },
+          "total_results": { "type": "number" }
+        },
+        "required": [
+          "page_size",
+          "page",
+          "results",
+          "total_pages",
+          "total_results"
+        ]
+      },
+      "PaginationResDTO": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/FilterMoviesDto" }
+          },
+          "data": { "$ref": "#/components/schemas/FilterResDTO" }
+        },
+        "required": ["filters", "data"]
+      },
+      "MaxMinYearResDTO": {
+        "type": "object",
+        "properties": {
+          "max_year": { "type": "string" },
+          "min_year": { "type": "string" }
+        },
+        "required": ["max_year", "min_year"]
+      }
+    }
+  }
+}
