@@ -11,11 +11,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document, {
-    swaggerOptions: {
-      ignoreTryCatch: (id: any) => !id.includes('swagger-ui'),
-    },
-  });
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }
