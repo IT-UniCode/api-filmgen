@@ -90,9 +90,9 @@ export class MoviesRepository {
         query.andWhere(
           new Brackets((qb) => {
             qb.where('movies.vote_average >= :from', {
-              from: new Date(from, 1, 1),
+              from: from,
             }).andWhere('movies.vote_average <= :to', {
-              to: new Date(to, 12, 31),
+              to: to,
             });
           }),
         );
@@ -102,9 +102,9 @@ export class MoviesRepository {
         query.andWhere(
           new Brackets((qb) => {
             qb.where('movies.vote_count >= :from', {
-              from: new Date(from, 1, 1),
+              from: from,
             }).andWhere('movies.vote_count <= :to', {
-              to: new Date(to, 12, 31),
+              to: to,
             });
           }),
         );
