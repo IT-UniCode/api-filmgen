@@ -11,6 +11,7 @@ import { PaginationBodyDTO } from './dto/pagination-body.dto';
 import { PaginationResDTO } from './dto/pagination.result.dto';
 import { MovieEntity } from './entities/movie.entity';
 import MoviesService from './movies.service';
+import { IFindMovieById } from './types/main';
 
 @ApiTags('Movies')
 @Controller('movies')
@@ -44,7 +45,7 @@ export class MoviesController {
   @Get('get-by-id/:movieId')
   async findMovieById(
     @Param('movieId', IdValidationPipe) movieId: number,
-  ): Promise<MovieEntity> {
+  ): Promise<IFindMovieById> {
     return this.moviesService.findMovieById(movieId);
   }
 

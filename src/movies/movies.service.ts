@@ -1,5 +1,9 @@
 import { HttpService } from '@nestjs/axios';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 import { IPagination, IPositiveRequest } from '../../core/types/main';
 
@@ -9,6 +13,8 @@ import { PaginationBodyDTO } from './dto/pagination-body.dto';
 import { PaginationResDTO } from './dto/pagination.result.dto';
 import { MovieEntity } from './entities/movie.entity';
 import { MoviesRepository } from './movies.repository';
+import * as FormData from 'form-data';
+import { IFindMovieById } from './types/main';
 
 @Injectable()
 export default class MoviesService {
@@ -32,8 +38,23 @@ export default class MoviesService {
     };
   }
 
-  async findMovieById(movieId: number): Promise<MovieEntity> {
-    return this.moviesRepository.findMovieById(movieId);
+  async findMovieById(movieId: number): Promise<IFindMovieById> {
+    const movie = await this.moviesRepository.findMovieById(movieId);
+
+    const bodyFormData = new FormData();
+    bodyFormData.append('q', movie.title);
+    try {
+      const { data } = await this.httpService.axiosRef.post(
+        'http://hdrezkaj1p9yu.org/engine/ajax/search.php',
+        bodyFormData,
+      );
+      const expression =
+        /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi;
+      const url = data.match(expression);
+      return { ...movie, rezkaUrl: url.at(0) };
+    } catch {
+      return movie;
+    }
   }
 
   async findLastPopular(): Promise<Array<MovieEntity>> {
