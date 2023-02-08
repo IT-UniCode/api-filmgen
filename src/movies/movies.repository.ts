@@ -78,9 +78,9 @@ export class MoviesRepository {
         query.andWhere(
           new Brackets((qb) => {
             qb.where('movies.release_date >= :from', {
-              from: new Date(from, 1, 1),
+              from: `${from}-01-01`,
             }).andWhere('movies.release_date <= :to', {
-              to: new Date(to, 12, 31),
+              to: `${to}-12-31`,
             });
           }),
         );
