@@ -35,7 +35,7 @@ export class MovieEntity {
   @Column({ type: 'varchar', nullable: true })
   poster_path: string;
 
-  @ApiProperty({ type: Date, default: '2021-20-20' })
+  @ApiProperty({ type: Date, example: '2021-20-20' })
   @Column({ type: 'date' })
   release_date: Date;
 

@@ -27,7 +27,7 @@ export class GenresController {
     return this.genresService.findByIds(idsArray);
   }
 
-  @Cron(CronExpression.EVERY_1ST_DAY_OF_MONTH_AT_NOON)
+  // @Cron(CronExpression.EVERY_1ST_DAY_OF_MONTH_AT_NOON)
   fetch(): Promise<IPositiveRequest> {
     return this.genresService.fetchGenres();
   }

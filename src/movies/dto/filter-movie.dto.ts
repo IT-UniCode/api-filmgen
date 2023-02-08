@@ -12,11 +12,11 @@ export class FilterMoviesDto {
   @IsEnum(Filters)
   field?: Filters;
 
-  @ApiProperty({ type: Number, default: null })
+  @ApiProperty({ type: Number, default: 2021 })
   @IsNotEmpty()
   from: number;
 
-  @ApiProperty({ type: Number, default: null })
+  @ApiProperty({ type: Number, default: 2023 })
   @IsNotEmpty()
   to: number;
 
