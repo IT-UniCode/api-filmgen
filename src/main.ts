@@ -9,9 +9,10 @@ async function bootstrap() {
     .setTitle('Api Filmgem')
     .setVersion('1.0')
     .build();
+
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document, {
-    customCss: '/swagger.css',
+    customCss: './swagger.css',
   });
 
   await app.listen(3000);
