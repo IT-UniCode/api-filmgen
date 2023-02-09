@@ -30,7 +30,6 @@
     "@nestjs/core": "9.0.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "9.0.1",
-    "@nestjs/schedule": "^2.1.0",
     "@nestjs/serve-static": "^3.0.0",
     "@nestjs/swagger": "6.0.1",
     "@nestjs/typeorm": "^9.0.1",
@@ -43,9 +42,6 @@
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
     "rxjs": "7.5.5",
-    "swagger-ui": "^4.15.5",
-    "swagger-ui-dist": "^4.15.5",
-    "swagger-ui-express": "^4.6.0",
     "typeorm": "^0.3.11"
   },
   "devDependencies": {
@@ -57,6 +53,7 @@
     "@types/node": "18.0.3",
     "@types/supertest": "2.0.12",
     "@typescript-eslint/eslint-plugin": "5.30.5",
+    "@typescript-eslint/typescript-estree": "^5.51.0",
     "@typescript-eslint/parser": "5.30.5",
     "eslint": "8.19.0",
     "eslint-config-prettier": "8.5.0",

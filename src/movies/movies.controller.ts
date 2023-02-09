@@ -1,8 +1,6 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
-import { IPositiveRequest } from '../../core/types/main';
 import { IdValidationPipe } from '../../pipes/id-validation.pipes';
 
 import { MaxMinYearResDTO } from './dto/max-min-year.response.dto';
@@ -17,11 +15,6 @@ import { IFindMovieById } from './types/main';
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
-
-  // @Cron(CronExpression.EVERY_DAY_AT_10AM)
-  fetch(): Promise<IPositiveRequest> {
-    return this.moviesService.fetchMovies();
-  }
 
   @ApiOperation({ summary: 'Get movie with pagination, sort and filter' })
   @ApiOkResponse({

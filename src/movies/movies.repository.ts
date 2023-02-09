@@ -128,11 +128,6 @@ export class MoviesRepository {
     return searchMovie;
   }
 
-  async saveMovies(movies: MovieEntity[]): Promise<void> {
-    const moviesEntities = this.movieEntity.create(movies);
-    await this.movieEntity.save(moviesEntities);
-  }
-
   async findLastPopular(): Promise<Array<MovieEntity>> {
     const serchMovies = await this.movieEntity
       .createQueryBuilder('movies')

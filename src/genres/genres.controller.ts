@@ -1,8 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-
-import { IPositiveRequest } from '../../core/types/main';
 
 import { GetByIdsDto } from './dto/get-by-ids.dto';
 import { GenreEntity } from './entities/genre.entity';
@@ -25,10 +22,5 @@ export class GenresController {
   @Post('ids')
   findByIds(@Body() idsArray: GetByIdsDto): Promise<GenreEntity[]> {
     return this.genresService.findByIds(idsArray);
-  }
-
-  // @Cron(CronExpression.EVERY_1ST_DAY_OF_MONTH_AT_NOON)
-  fetch(): Promise<IPositiveRequest> {
-    return this.genresService.fetchGenres();
   }
 }

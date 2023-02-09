@@ -1,4 +1,3 @@
-import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -8,7 +7,7 @@ import { GenresRepository } from './genres.repository';
 import { GenresService } from './genres.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([GenreEntity]), HttpModule],
+  imports: [TypeOrmModule.forFeature([GenreEntity])],
   controllers: [GenresController],
   providers: [GenresService, GenresRepository],
 })
