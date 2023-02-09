@@ -1,4 +1,4 @@
-import { MovieEntity } from 'movies/entities/movie.entity';
+import { MovieEntity } from '../../movies/entities/movie.entity';
 
 import { IPagination } from '../../../core/types/main';
 
