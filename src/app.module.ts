@@ -10,9 +10,9 @@ import { MoviesModule } from './movies/movies.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
-    GenresModule,
-    MoviesModule,
     FiltersModule,
+    MoviesModule,
+    GenresModule,
   ],
 })
 export class AppModule {}
