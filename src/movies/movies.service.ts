@@ -37,12 +37,12 @@ export default class MoviesService {
   async findMovieById(movieId: number): Promise<IFindMovieById> {
     const movie = await this.moviesRepository.findMovieById(movieId);
 
-    const bodyFormData = new FormData();
-    bodyFormData.append('q', movie.title);
+    const BodyData = new FormData();
+    BodyData.append('q', movie.title);
     try {
       const { data } = await this.httpService.axiosRef.post(
         'http://hdrezkaj1p9yu.org/engine/ajax/search.php',
-        bodyFormData,
+        BodyData,
       );
       const expression =
         /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi;

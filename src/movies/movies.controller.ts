@@ -18,7 +18,7 @@ import { IFindMovieById } from './types/main';
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
-  @Cron(CronExpression.EVERY_DAY_AT_10AM)
+  // @Cron(CronExpression.EVERY_DAY_AT_10AM)
   fetch(): Promise<IPositiveRequest> {
     return this.moviesService.fetchMovies();
   }
