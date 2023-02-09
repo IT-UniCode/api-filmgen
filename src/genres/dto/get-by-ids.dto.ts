@@ -1,8 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber } from 'class-validator';
+import { IsInt, Max, Min } from 'class-validator';
 
 export class GetByIdsDto {
-  @ApiProperty({ type: Number, isArray: true })
-  @IsNumber({}, { each: true })
-  ids: number[];
+  @ApiProperty({ type: Number, isArray: true, default: [] })
+  @IsInt({ each: true })
+  @Min(1, { each: true })
+  @Max(1000, { each: true })
+  genres_ids: number[];
 }

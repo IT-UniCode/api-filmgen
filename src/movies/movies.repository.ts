@@ -26,6 +26,8 @@ export class MoviesRepository {
     paginationBodyDTO: FilterMoviesDto[],
   ): Promise<IMoviesPagination> {
     const { pageSize, page, searchTerm, orderBy, dir } = paginateMoviesDto;
+    const currentTime = new Date();
+    const currentYear = currentTime.getFullYear();
     const query = this.movieEntity.createQueryBuilder('movies');
 
     query.orderBy(
@@ -45,7 +47,7 @@ export class MoviesRepository {
 
     if (paginationBodyDTO.length) {
       for await (const filter of paginationBodyDTO) {
-        this.filterMovies(query, filter);
+        this.filterMovies(query, filter, currentYear);
       }
     }
 
@@ -66,21 +68,22 @@ export class MoviesRepository {
   async filterMovies(
     query: SelectQueryBuilder<MovieEntity>,
     filterMoviesDto: FilterMoviesDto,
+    currentYear: number,
   ) {
-    const { from, to, field, genre_ids } = filterMoviesDto;
+    const { from, to, field, genres_ids } = filterMoviesDto;
 
     switch (field) {
       case Filters.Genres:
-        query.where('movies.genre_ids && :genres', { genres: genre_ids });
+        query.where('movies.genre_ids && :genres', { genres: genres_ids });
         break;
 
       case Filters.ReleaseDate:
         query.andWhere(
           new Brackets((qb) => {
             qb.where('movies.release_date >= :from', {
-              from: `${from}-01-01`,
+              from: `${from ? from : 1990}-01-01`,
             }).andWhere('movies.release_date <= :to', {
-              to: `${to}-12-31`,
+              to: `${to ? to : currentYear}-12-31`,
             });
           }),
         );
@@ -128,11 +131,11 @@ export class MoviesRepository {
     return searchMovie;
   }
 
-  async findLastPopular(): Promise<Array<MovieEntity>> {
+  async findLastPopular(movieAmount: number): Promise<MovieEntity[]> {
     const serchMovies = await this.movieEntity
       .createQueryBuilder('movies')
       .orderBy('movies.popularity', 'DESC')
-      .take(10)
+      .take(movieAmount)
       .getMany();
 
     if (!serchMovies.length)

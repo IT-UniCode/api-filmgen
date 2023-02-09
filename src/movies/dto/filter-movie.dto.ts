@@ -1,26 +1,31 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import {
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  ValidateIf,
+} from 'class-validator';
+import { GetByIdsDto } from 'genres/dto/get-by-ids.dto';
 
 import { Filters } from '../../../core/enums/main';
 
-export class FilterMoviesDto {
+export class FilterMoviesDto extends GetByIdsDto {
   @ApiProperty({
     enum: Filters,
     required: true,
   })
   @IsNotEmpty()
   @IsEnum(Filters)
-  field?: Filters;
+  field: Filters;
 
-  @ApiProperty({ type: Number, default: 2021 })
+  @ApiProperty({ type: Number, nullable: true, example: 2021 })
   @IsNotEmpty()
+  @IsInt()
   from: number;
 
-  @ApiProperty({ type: Number, default: 2023 })
+  @ApiProperty({ type: Number, nullable: true, example: 2023 })
   @IsNotEmpty()
+  @IsInt()
   to: number;
-
-  @ApiProperty({ type: Number, isArray: true, default: [] })
-  @IsNumber({}, { each: true })
-  genre_ids: number[];
 }

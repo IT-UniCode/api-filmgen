@@ -1,9 +1,17 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-
 import { IdValidationPipe } from '../../pipes/id-validation.pipes';
 
-import { MaxMinYearResDTO } from './dto/max-min-year.response.dto';
+import { GetLastPopularDto } from './dto/get-last-popular.dto';
+
 import { PaginateMoviesDto } from './dto/paginate-movie.dto';
 import { PaginationBodyDTO } from './dto/pagination-body.dto';
 import { PaginationResDTO } from './dto/pagination.result.dto';
@@ -14,7 +22,19 @@ import { IFindMovieById } from './types/main';
 @ApiTags('Movies')
 @Controller('movies')
 export class MoviesController {
-  constructor(private readonly moviesService: MoviesService) {}
+  constructor(private moviesService: MoviesService) {}
+
+  @ApiOperation({ summary: 'Get last popular' })
+  @ApiOkResponse({
+    type: MovieEntity,
+    isArray: true,
+  })
+  @Get('last-popular')
+  async findLastPopular(
+    @Query() getLastPopularDto: GetLastPopularDto,
+  ): Promise<MovieEntity[]> {
+    return this.moviesService.findLastPopular(getLastPopularDto.moviesAmount);
+  }
 
   @ApiOperation({ summary: 'Get movie with pagination, sort and filter' })
   @ApiOkResponse({
@@ -40,24 +60,5 @@ export class MoviesController {
     @Param('movieId', IdValidationPipe) movieId: number,
   ): Promise<IFindMovieById> {
     return this.moviesService.findMovieById(movieId);
-  }
-
-  @ApiOperation({ summary: 'Get last 10 popular' })
-  @ApiOkResponse({
-    type: MovieEntity,
-    isArray: true,
-  })
-  @Get('last-popular')
-  async findLastPopular(): Promise<Array<MovieEntity>> {
-    return this.moviesService.findLastPopular();
-  }
-
-  @ApiOperation({ summary: 'Get max and min realese year' })
-  @ApiOkResponse({
-    type: MaxMinYearResDTO,
-  })
-  @Get('get-max-min-year')
-  async getMaxMinYear(): Promise<MaxMinYearResDTO> {
-    return this.moviesService.getMaxMinYear();
   }
 }

@@ -1,5 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsEnum, IsOptional, IsString, MaxLength } from 'class-validator';
 
 import { PaginateDto } from '../../../core/dto/paginate.dto';
 import { Ordering, SortDirection } from '../../../core/enums/main';
@@ -8,6 +9,7 @@ export class PaginateMoviesDto extends PaginateDto {
   @ApiPropertyOptional({ type: String, name: 'searchTerm' })
   @IsOptional()
   @IsString()
+  @MaxLength(400)
   searchTerm?: string;
 
   @ApiPropertyOptional({

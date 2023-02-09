@@ -7,18 +7,14 @@ import { IdValidationPipe } from '../pipes/id-validation.pipes';
 import { configService } from './config/config.service';
 import { GenresModule } from './genres/genres.module';
 import { MoviesModule } from './movies/movies.module';
+import { FiltersModule } from './filters/filters.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     GenresModule,
     MoviesModule,
-  ],
-  providers: [
-    {
-      provide: APP_PIPE,
-      useClass: IdValidationPipe,
-    },
+    FiltersModule,
   ],
 })
 export class AppModule {}

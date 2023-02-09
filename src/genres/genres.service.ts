@@ -13,6 +13,6 @@ export class GenresService {
   }
 
   async findByIds(idsArray: GetByIdsDto): Promise<GenreEntity[]> {
-    return this.genresRepository.findByIds(idsArray.ids);
+    return this.genresRepository.findByIds(idsArray.genres_ids);
   }
 }

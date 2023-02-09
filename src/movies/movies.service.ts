@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import * as FormData from 'form-data';
+import { GetLastPopularDto } from './dto/get-last-popular.dto';
 
 import { MaxMinYearResDTO } from './dto/max-min-year.response.dto';
 import { PaginateMoviesDto } from './dto/paginate-movie.dto';
@@ -50,8 +51,8 @@ export default class MoviesService {
     }
   }
 
-  async findLastPopular(): Promise<Array<MovieEntity>> {
-    return this.moviesRepository.findLastPopular();
+  async findLastPopular(getLastPopularDto: number): Promise<MovieEntity[]> {
+    return this.moviesRepository.findLastPopular(getLastPopularDto);
   }
 
   async getMaxMinYear(): Promise<MaxMinYearResDTO> {

@@ -8,7 +8,7 @@ import { GenresService } from './genres.service';
 @ApiTags('Genres')
 @Controller('genres')
 export class GenresController {
-  constructor(private readonly genresService: GenresService) {}
+  constructor(private genresService: GenresService) {}
 
   @ApiOperation({ summary: 'Get all genres' })
   @ApiOkResponse({ type: GenreEntity, isArray: true })
