@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import * as FormData from 'form-data';
+import { default as FormData } from 'form-data';
 
 import { IPagination, IPositiveRequest } from '../../core/types/main';
 
@@ -36,13 +36,12 @@ export default class MoviesService {
 
   async findMovieById(movieId: number): Promise<IFindMovieById> {
     const movie = await this.moviesRepository.findMovieById(movieId);
-
-    const BodyData = new FormData();
-    BodyData.append('q', movie.title);
     try {
+      let bodyData = new FormData();
+      bodyData.append('q', movie.title);
       const { data } = await this.httpService.axiosRef.post(
         'http://hdrezkaj1p9yu.org/engine/ajax/search.php',
-        BodyData,
+        bodyData,
       );
       const expression =
         /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi;
