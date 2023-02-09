@@ -13,7 +13,7 @@ export class IdValidationPipe implements PipeTransform {
       return value;
     }
 
-    if (value < 1 && value > 10000000000 && !isNumber(value)) {
+    if (value < 1 && !isNumber(value)) {
       throw new BadRequestException('Invalid ID format');
     }
 
