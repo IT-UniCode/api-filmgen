@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
+
 import { GenresRepository } from 'genres/genres.repository';
 import { MoviesRepository } from 'movies/movies.repository';
+
 import { GetAllFiltersRes } from './dto/get-all-filters.response.dto';
 
 @Injectable()

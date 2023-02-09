@@ -1,11 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEnum,
-  IsInt,
-  IsNotEmpty,
-  IsNumber,
-  ValidateIf,
-} from 'class-validator';
+import { IsEnum, IsInt, IsNotEmpty } from 'class-validator';
+
 import { GetByIdsDto } from 'genres/dto/get-by-ids.dto';
 
 import { Filters } from '../../../core/enums/main';

@@ -1,17 +1,9 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+
 import { IdValidationPipe } from '../../pipes/id-validation.pipes';
 
 import { GetLastPopularDto } from './dto/get-last-popular.dto';
-
 import { PaginateMoviesDto } from './dto/paginate-movie.dto';
 import { PaginationBodyDTO } from './dto/pagination-body.dto';
 import { PaginationResDTO } from './dto/pagination.result.dto';

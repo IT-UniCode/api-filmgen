@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { FiltersService } from './filters.service';
-import { FiltersController } from './filters.controller';
+
 import { GenresModule } from 'genres/genres.module';
 import { MoviesModule } from 'movies/movies.module';
+
+import { FiltersController } from './filters.controller';
+import { FiltersService } from './filters.service';
 
 @Module({
   imports: [GenresModule, MoviesModule],
