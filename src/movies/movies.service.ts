@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import FormData from 'form-data';
+import { findUrlUtil } from '../../core/utils/find-url.util';
 
 import { MaxMinYearResDTO } from './dto/max-min-year.response.dto';
 import { PaginateMoviesDto } from './dto/paginate-movie.dto';
@@ -38,13 +39,13 @@ export default class MoviesService {
       const bodyData = new FormData();
       bodyData.append('q', movie.title);
       const { data } = await this.httpService.axiosRef.post(
-        'http://hdrezkaj1p9yu.org/engine/ajax/search.php',
+        process.env.REZKA_URL,
         bodyData,
       );
-      const expression =
-        /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi;
-      const url = data.match(expression);
-      return { ...movie, rezkaUrl: url.at(0) };
+
+      const url = findUrlUtil(data);
+
+      return { ...movie, urls: [{ rezkaUrl: url }] };
     } catch {
       return movie;
     }

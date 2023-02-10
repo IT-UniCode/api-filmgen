@@ -11,5 +11,5 @@ export interface IMoviesPagination extends IPagination {
 }
 
 export interface IFindMovieById extends MovieEntity {
-  rezkaUrl?: string;
+  urls?: { rezkaUrl?: string }[];
 }
