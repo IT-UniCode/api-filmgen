@@ -1,4 +1,4 @@
-import { MovieEntity } from 'movies/entities/movie.entity';
+import { MovieEntity } from '../../src/movies/entities/movie.entity';
 
 export interface IPositiveRequest {
   success: boolean;
