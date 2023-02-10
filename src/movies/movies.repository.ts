@@ -57,11 +57,11 @@ export class MoviesRepository {
     const movies = await query.getMany();
 
     return {
-      page: page,
-      page_size: pageSize,
-      results: movies,
       total_results: totalAmount,
       total_pages: totalPages,
+      results: movies,
+      page: page,
+      page_size: pageSize,
     };
   }
 
