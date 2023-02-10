@@ -1,6 +1,5 @@
-import { MovieEntity } from '../../movies/entities/movie.entity';
-
 import { IPagination } from '../../../core/types/main';
+import { MovieEntity } from '../../movies/entities/movie.entity';
 
 export interface IMovie {
   id: number;

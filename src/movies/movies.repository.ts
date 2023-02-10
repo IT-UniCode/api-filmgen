@@ -35,12 +35,6 @@ export class MoviesRepository {
       dir === SortDirection.Descend ? 'DESC' : 'ASC',
     );
 
-    if (searchTerm) {
-      query.where('movies.title ILIKE :title', {
-        title: `%${searchTerm.trim()}%`,
-      });
-    }
-
     query.take(pageSize).skip((page - 1) * pageSize);
 
     if (!query) throw new BadRequestException('No such page');
@@ -49,6 +43,12 @@ export class MoviesRepository {
       for await (const filter of paginationBodyDTO) {
         this.filterMovies(query, filter, currentYear);
       }
+    }
+
+    if (searchTerm) {
+      query.where('movies.title ILIKE :title', {
+        title: `%${searchTerm.trim()}%`,
+      });
     }
 
     const totalAmount = await query.getCount();

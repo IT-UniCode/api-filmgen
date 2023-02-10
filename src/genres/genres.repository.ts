@@ -26,6 +26,9 @@ export class GenresRepository {
   }
 
   async findByIds(idsArray: number[]): Promise<GenreEntity[]> {
+    if (!idsArray.length)
+      throw new BadRequestException('idsArray cannot be empty');
+
     const searchGenres = await this.genreEntity
       .createQueryBuilder('genres')
       .where('genres.id IN (:...ids)', { ids: idsArray })

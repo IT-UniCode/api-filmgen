@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { FiltersModule } from './filters/filters.module';
 import { configService } from './config/config.service';
+import { FiltersModule } from './filters/filters.module';
 import { GenresModule } from './genres/genres.module';
 import { MoviesModule } from './movies/movies.module';
 
