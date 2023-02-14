@@ -8,6 +8,6 @@ export class GetLastPopularDto {
   @IsInt()
   @IsNotEmpty()
   @Min(1)
-  @Max(500)
+  @Max(200)
   moviesAmount: number;
 }
