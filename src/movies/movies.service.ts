@@ -47,7 +47,7 @@ export default class MoviesService {
 
       return { ...movie, urls: [{ rezkaUrl: url }] };
     } catch {
-      return movie;
+      return { ...movie, urls: [] };
     }
   }
 
